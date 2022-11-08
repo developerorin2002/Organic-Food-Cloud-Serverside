@@ -1,0 +1,44 @@
+[
+    {
+        "name":"Honey Nuts",
+        "image":"https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "price":"500Tk",
+        "details":"oney is an ancient substance, truly as old as the birds and the bees, and it has a quaint image—helped along by Winnie-the-Pooh and that nursery rhyme about the queen eating bread and honey in the parlor. People seem to like it, but there is, shall we say, not a lot of contemporary buzz about it.Nearly all large honey producers in this country today sell a uniform, blended product that has been filtered and heated to high temperatures to prevent granulation and to extend shelf life—a process that inevitably kills some flavor.",
+        "ratings":5
+    },
+    {
+        "name":"Pure Vegitables",
+        "image":"https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "price":"1000Tk",
+        "details":"A diet rich in vegetables and fruits can lower blood pressure, reduce the risk of heart disease and stroke, prevent some types of cancer, lower risk of eye and digestive problems, and have a positive effect upon blood sugar, which can help keep appetite in check",
+        "ratings":5
+    },
+    {
+        "name":"Hand made burgar",
+        "image":"https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "price":"300Tk",
+        "details":"Burgers are one of those recipes that most of us have on the go. Here we bring you five delectable desi-style burger recipes to make at home. ",
+        "ratings":5
+    },
+    {
+        "name":"Hand made PIZZA",
+        "image":"https://images.pexels.com/photos/315755/pexels-photo-315755.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "price":"300Tk",
+        "details":"pizza, dish of Italian origin consisting of a flattened disk of bread dough topped with some combination of olive oil, oregano, tomato, olives, mozzarella or other cheese, and many other ingredients, baked quickly",
+        "ratings":4
+    },
+    {
+        "name":"Special Thai Soup",
+        "image":"https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "price":"200Tk",
+        "details":"Everyone loves a bowl of delicious soup especially as the weather begins to cool off.As a side dish or the main course, Thai soups feed the soul and warm the body. The best part? These dishes offer a variety of vegetables, rice noodles,proteins, and broths other Thai dishes sometimes lack",
+        "ratings":4
+    },
+    {
+        "name":"Readymade Special Masala",
+        "image":"https://images.pexels.com/photos/1109197/pexels-photo-1109197.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "price":"500Tk",
+        "details":"nothing can beat home-made masalas, especially the flavours they impart when they are freshly blended. These masalas can completely change the look and taste of the food. It does get easy to add ready-made masalas in the food considering the time constraints and busy lives that we lead. ",
+        "ratings":3
+    }
+]
