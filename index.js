@@ -34,18 +34,21 @@ const run = async() =>{
     const serviceCollection = client.db('foodcloud').collection('services');
     const reviewsCollection = client.db('foodcloud').collection('reviews')
     try{
+        // home service api
         app.get('/homeservice',async(req,res)=>{
             const query = {};
             const cursor = serviceCollection.find(query);
             const result = await cursor.limit(3).toArray();
             res.send(result);
         });
+        // all service api
         app.get('/services',async(req,res)=>{
             const query = {};
             const cursor = serviceCollection.find(query)
             const result = await cursor.toArray();
             res.send(result)
         });
+        // specific service section
         app.get('/services/:id',async(req,res)=>{
             const id = req.params.id;
             const query = {_id:ObjectId(id)}
@@ -58,18 +61,19 @@ const run = async() =>{
             const result = await reviewsCollection.insertOne(review);
             res.send(result); 
         });
+        // all reviews
         app.get('/reviews',async(req,res)=>{
             const query = {};
             const cursor = reviewsCollection.find(query).sort({_id:-1});
             const result = await cursor.toArray();
             res.send(result);
         });
+        // my review
         app.get('/myreviews',verifyToken,async(req,res)=>{
             const decoded = req.decoded;
             if(decoded.email!==req.query.email){
                 return res.status(403).send('unauthorized access');
             }
-            
             const email = req.query.email;
             let query = {}
             if(req.query.email){
@@ -79,6 +83,7 @@ const run = async() =>{
             const result = await cursor.toArray();
             res.send(result);
         });
+        // for jwt token
         app.post('/jwt',(req,res)=>{
             const user = req.body;
             const token = jwt.sign(user,process.env.TOKEN_SECRET,{expiresIn:'5d'});
@@ -133,11 +138,7 @@ const run = async() =>{
 }
 
 run().catch(err=>console.log(err))
-
-
-
-
-
+// port 
 app.listen(port,()=>{
     console.log(`server is running on port ${port}`)
 })
