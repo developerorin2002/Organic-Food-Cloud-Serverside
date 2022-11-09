@@ -13,6 +13,23 @@ app.use(express.json())
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.wfzwlor.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
+// verify token
+const verifyToken = (req,res,next) =>{
+    const authHeader = req.headers.authorization;
+    if(!authHeader){
+        return res.status(401).send('unAuthorizedAccess')
+    }
+    const token = authHeader.split(' ')[1];
+    jwt.verify(token,process.env.TOKEN_SECRET,(err , decoded)=>{
+        if(err){
+            res.status(401).send('unauthorized access')
+        }
+        req.decoded = decoded
+    })
+    next();
+
+}
+
 const run = async() =>{
     const serviceCollection = client.db('foodcloud').collection('services');
     const reviewsCollection = client.db('foodcloud').collection('reviews')
@@ -43,12 +60,17 @@ const run = async() =>{
         });
         app.get('/reviews',async(req,res)=>{
             const query = {};
-            const cursor = reviewsCollection.find(query);
+            const cursor = reviewsCollection.find(query).sort({_id:-1});
             const result = await cursor.toArray();
             res.send(result);
         });
         // my reviews api
-        app.get('/myreviews',async(req,res)=>{
+        app.get('/myreviews',verifyToken,async(req,res)=>{
+            const decoded = req.decoded;
+            if(decoded.email!==req.query.email){
+                return res.status(403).send('unauthorized access');
+            }
+            
             const email = req.query.email;
             let query = {}
             if(req.query.email){
@@ -61,7 +83,13 @@ const run = async() =>{
         app.post('/jwt',(req,res)=>{
             const user = req.body;
             const token = jwt.sign(user,process.env.TOKEN_SECRET,{expiresIn:'5d'});
-            res.send(token);
+            res.send({token});
+        });
+        // add service
+        app.post('/services',async(req,res)=>{
+            const service = req.body;
+            const result = await serviceCollection.insertOne(service);
+            res.send(result)
         })
 
     }
