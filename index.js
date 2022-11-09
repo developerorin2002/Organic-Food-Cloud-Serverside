@@ -64,7 +64,6 @@ const run = async() =>{
             const result = await cursor.toArray();
             res.send(result);
         });
-        // my reviews api
         app.get('/myreviews',verifyToken,async(req,res)=>{
             const decoded = req.decoded;
             if(decoded.email!==req.query.email){
@@ -90,6 +89,15 @@ const run = async() =>{
             const service = req.body;
             const result = await serviceCollection.insertOne(service);
             res.send(result)
+        })
+        // delete user review 
+        app.delete('/myreviews/:id',async(req,res)=>{
+            const id = req.params.id;
+            const query = {
+                _id:ObjectId(id)
+            };
+            const result = await reviewsCollection.deleteOne(query);
+            res.send(result);
         })
 
     }
