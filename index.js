@@ -98,6 +98,32 @@ const run = async() =>{
             };
             const result = await reviewsCollection.deleteOne(query);
             res.send(result);
+        });
+        // get specific review
+        app.get('/update/:id',async(req,res)=>{
+            const id = req.params.id;
+            const query = {
+                _id:ObjectId(id)
+            }
+            const result = await reviewsCollection.findOne(query)
+            res.send(result)
+        })
+        // update review
+        app.patch('/update/:id',async(req,res)=>{
+            const id = req.params.id;
+            const updateInfo = req.body;
+            console.log(updateInfo)
+            const query = {
+                _id:ObjectId(id)
+            };
+            const updatedDoc = {
+                $set:{
+                    review:updateInfo.message,
+                    rating:updateInfo.rating
+                }
+            }
+            const result = await reviewsCollection.updateOne(query,updatedDoc);
+            res.send(result);
         })
 
     }
